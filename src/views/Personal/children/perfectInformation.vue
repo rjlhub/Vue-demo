@@ -62,18 +62,6 @@
               </div>
               <p class="auth">上传手持身份证</p>
             </div>
-            <div class="authborder">
-              <div class="authBox">
-                <i class="iconfont icon-camera_fill"></i>
-              </div>
-              <p class="auth">上传手持身份证</p>
-            </div>
-            <router-link class="authborder" to="" tag="div">
-              <div class="authBox">
-                <i class="iconfont icon-camera_fill"></i>
-              </div>
-              <p class="auth">上传手持身份证</p>
-            </router-link>
         </div>
         </div>
       </div>
@@ -88,19 +76,24 @@ export default {
   },
   data() {
     return {
-
+      
     }
+  },
+  created(){
+    
   }
 }
 </script>
 <style lang="less" scoped>
   .perfectInfo {
     background-color: #ffffff;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    padding-top: 60px;
+    padding-bottom: 10px;
+    min-height: calc(100% - 60px);
   }
   .perfectmain {
     .steps {

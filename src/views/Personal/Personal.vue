@@ -26,7 +26,16 @@
       </div>
       <div class="personList">
         <ul style="flex-direction: column;">
-          <li class="personItem row">
+          <router-link to="/Personal/businesscard" tag="li" class="personItem row">
+            <div class="row flexCenter">
+              <i class="iconfont icon-qrcode_fill" style="color:#564598"></i>
+              <p class="title">二维码名片</p>
+            </div>
+            <div class="row flexCenter">
+              <i class="iconfont icon-enter"></i>
+            </div>
+          </router-link>
+          <router-link to="/Personal/coupons" tag="li" class="personItem row">
             <div class="row flexCenter">
               <i class="iconfont icon-coupons" style="color:#564598"></i>
               <p class="title">我的优惠券</p>
@@ -35,8 +44,8 @@
               <p class="subTit">共<span style="color: #564598">{{personInfo.couponsCount}}</span>张可用</p>
               <i class="iconfont icon-enter"></i>
             </div>
-          </li>
-          <li class="personItem row">
+          </router-link>
+          <router-link to="/Personal/integral" tag="li" class="personItem row">
             <div class="row flexCenter">
               <i class="iconfont icon-data" style="color:#564598"></i>
               <p class="title">我的积分</p>
@@ -45,12 +54,12 @@
               <p class="subTit">{{personInfo.integralCount}}分</p>
               <i class="iconfont icon-enter"></i>
             </div>
-          </li>
+          </router-link>
           
           <router-link to="/Personal/perfectInfo" tag="li" class="personItem row">
             <div class="row flexCenter">
-              <i class="iconfont icon-mine" style="color:#564598"></i>
-              <p class="title">个人信息</p>
+              <i class="iconfont icon-businesscard" style="color:#564598"></i>
+              <p class="title">实名认证</p>
             </div>
             <div class="row flexCenter">
               <i class="iconfont icon-enter"></i>
@@ -113,7 +122,7 @@ export default {
 <style scoped>
   .personalPage {
     padding-top: 54px;
-    background-color: #f5f5f5;
+    background-color: #f2f2f2;
     flex-direction: row;
     align-items: center;
   }

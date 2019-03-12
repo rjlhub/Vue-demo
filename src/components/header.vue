@@ -5,6 +5,7 @@
     </div>
     <p class="header-title">{{name}}</p>
   </header>
+  
 </template>
 <script>
 export default {
@@ -24,16 +25,20 @@ export default {
 }
 </script>
 <style scoped>
-  
   .b-header {
     height: 60px;
     background-color: #ffffff;
     display: flex;
     flex-direction: row;
     position: relative;
-    display: flex;
+    flex:1;
     justify-content: center;
     align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 100;
   }
   .back {
     width: 60px;
@@ -45,7 +50,6 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
   }
   .icontype {
     font-size: 24px;

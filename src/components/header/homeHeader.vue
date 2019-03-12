@@ -1,23 +1,23 @@
 <template>
   <div class="home-header">
-    <div class="b-header">
+    <div class="b-header" :style="toolbarStyle">
       <div class="back" @click="backPage">
         <i class="iconfont icon-message1 icontype"></i>
       </div>
       <div class="searchbox">
-        <div class="searchIptBox">
+        <router-link to="/search" tag="div" class="searchIptBox">
           <i class="iconfont icon-search iconStype"></i>
-          <input type="text" placeholder="基金/股票/资讯" v-model="iptVal" @focus="iptFocus" class="searchIpt">
-        </div>
+          <div class="searchIpt">{{iptVal}}</div>
+        </router-link>
       </div>
-      <div class="back">
+      <router-link tag="div" to="message" class="back" >
         <i class="iconfont icon-document icontype"></i>
-      </div>
+      </router-link>
       <p class="header-title">{{name}}</p>
     </div>
     <div class="home-nav">
       <ul class="home-nav-ul">
-        <li class="home-nav-item" v-for="(item,index) in homeNavs" :key="index">
+        <li class="home-nav-item" v-for="(item,index) in homeNavs" :key="index" @click="navJump(item.to,item.cid)">
           <i class="navitemIcon" :class="['iconfont',item.type]"></i>
           <p class="navitemName">{{item.name}}</p>
         </li>
@@ -39,23 +39,48 @@ export default {
       iptVal:'基金/股票/资讯',
       homeNavs:[
         {
+          cid:1,
+          to:'scan',
           name:'扫一扫',
           type:'icon-scan'
         },
         {
+          cid:2,
+          to:'',
           name:'收付款',
           type:'icon-qrcode'
         },
         {
+          cid:3,
+          to:'bankCard',
           name:'银行卡',
           type:'icon-headlines'
         },
         {
+          cid:4,
+          to:'signIn',
           name:'签到有礼',
           type:'icon-activity'
         }
-      ]
+      ],
+      toolbarStyle:{
+        
+      }
     }
+  },
+  mounted() {
+    
+    // ModalHelper.afterOpen();
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  created(){
+    this.toolbarStyle = {
+      background: "transparent",
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100%"
+    };
   },
   methods:{
     backPage(){
@@ -63,21 +88,59 @@ export default {
       this.$router.go(-1);
     },
     iptFocus(){
+      this.iptVal = ''
+    },
+    handleScroll(){
+      var scrollTop = 
+          window.pageYOffset || 
+          document.documentElement.scrollTop || 
+          document.body.scrollTop;
+      // scrollTop = (scrollTop / 100) * 1
+      
+      if (scrollTop > 30) {
+        this.toolbarStyle = {
+          'background':'linear-gradient(#9483e9,#9282e4)'
+        }
+      }else {
+        this.toolbarStyle = {
+          background:'transparent'
+        }
+      }
+      
+    },
+    navJump(to,id){
+      console.log(to,id)
+      this.$router.push({name: to,params:{id: id}})
     }
-  } 
+  },
+  destroyed(){
+    this.iptVal = '基金/股票/资讯'
+  }
+  // directives:{
+  //   focus:{
+  //     inserted: function (el) {
+  //       el.focus()
+  //     }
+  //   }
+  // }
 }
 </script>
 <style lang="less" scoped>
   .home-header {
-    background: linear-gradient(#9882ee,#564598)
+    background: linear-gradient(#9882ee,#564598);
   }
 
   .b-header {
     height: 60px;
     // background-color: #564598;
     display: flex;
+    flex:1;
     flex-direction: row;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -104,6 +167,7 @@ export default {
           padding: 0 13px;
           font-size: 16px;
           font-weight: 500;
+          line-height: 30px;
           color: #ffffff;
           background-color: transparent;
         }
@@ -142,6 +206,7 @@ export default {
     height: 120px;
     display: flex;
     align-items: center;
+    padding-top: 60px;
     .home-nav-ul {
       width: 100%;
       display: flex;
