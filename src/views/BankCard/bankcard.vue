@@ -1,8 +1,8 @@
 <template>
   <div class="bankCard">
     <v-header name="银行卡管理"></v-header>
-    <div class="cardmain" @click="popUpEmptyClick">
-      <div class="addCard">
+    <div class="cardmain">
+      <div class="addCard" @click.stop="popUpEmptyClick">
         <i class="iconfont icon-yinhangqia yhk"></i>
         <div class="add-text">
           <p style="font-size: 20px;font-weight: 500;line-height: 32px;">添加银行卡</p>
@@ -41,16 +41,16 @@
       <p>解除绑定</p>
     </div>
 
-    <div class="coverlayer" v-if="isShowPopup" @click="popUpEmptyClick()">
-      <div class="mycards">
+    <div class="coverlayer" v-if="isShowPopup" @click.stop="popUpEmptyClick">
+      <div class="mycards" @click.stop="'return false'">
         <p>我的银行卡</p>
         <div class="mycardlist">
           <div class="mycarditem" v-for="(item,idx) in cardlist" :key="idx">
             <p style="font-size: 16px;font-weight: bold;color:#333333;">{{item.name}}{{item.number}}</p>
-            <i class="iconfont icon-success_fill" style="font-size: 30px;color:#564598;"></i>
+            <i :class="['iconfont',item.is_choose==true?'icon-success_fill':'icon-success']" style="font-size: 30px;color:#564598;" @click.stop="multiSelect(item)"></i>
           </div>
         </div>
-        <div class="btnctrl">
+        <div class="btnctrl" @click="management">
           <p>银行卡管理</p>
         </div>
       </div>
@@ -80,6 +80,8 @@ const ModalHelper = ((bodyCls) =>{
 
 import vHeader from '@/components/header'
 import { InlineXSwitch } from 'vux'
+
+let parmas = [];
 export default {
   components:{
     vHeader,
@@ -88,7 +90,7 @@ export default {
   data(){
     return{
       value: false,
-      isShowPopup: true,
+      isShowPopup: false,
       cardlist:[
         {
           name:'工商银行储蓄卡',
@@ -97,31 +99,46 @@ export default {
           name:'农业银行储蓄卡',
           number:'8140'
         },{
-          name:'农业银行储蓄卡',
-          number:'8140'
+          name:'建设银行储蓄卡',
+          number:'0820'
         },{
-          name:'农业银行储蓄卡',
-          number:'8140'
+          name:'兴业银行储蓄卡',
+          number:'1033'
         },{
-          name:'农业银行储蓄卡',
-          number:'8140'
-        },{
-          name:'农业银行储蓄卡',
-          number:'8140'
-        },{
-          name:'农业银行储蓄卡',
-          number:'8140'
+          name:'邮政储蓄银行储蓄卡',
+          number:'6621'
         }
       ]
     }
   },
   methods:{
     popUpEmptyClick(){
+
       this.isShowPopup = !this.isShowPopup;
+    },
+    multiSelect(item){
+      let dataArr = [];
+      item.is_choose = !item.is_choose;
+      
+      this.cardlist.forEach(ele => {
+        if(ele.is_choose==true){
+          dataArr.push(ele)
+        }
+      })
+      parmas = [...new Set(dataArr)];
+      
+    },
+    management(){
+      console.log(parmas);
+      // 提交 parmas
     }
   },
   created(){
     ModalHelper.afterOpen();
+    this.cardlist.forEach((ele,idx) => {
+      this.$set(ele,'is_choose',false)
+    })
+    console.log(this.$route.params)
   }
 }
 </script>
@@ -243,6 +260,7 @@ export default {
           color: #564598;
           font-weight: bold;
           text-align: center;
+          border-bottom: 1px solid #eeeeee;
         }
         .mycardlist {
           height: 162px;

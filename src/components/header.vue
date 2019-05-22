@@ -4,6 +4,7 @@
       <i class="iconfont icon-return icontype"></i>
     </div>
     <p class="header-title">{{name}}</p>
+    <slot text="my-head"></slot>
   </header>
   
 </template>

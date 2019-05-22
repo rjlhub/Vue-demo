@@ -1,24 +1,46 @@
 <template>
   <div id="app">
-    <!-- <img src="./assets/logo.png"> -->
-    <router-view/>
+    
+    <router-view class="router-view"/>
+    
   </div>
 </template>
 
 <script>
-export default {
-  name: 'App'
-}
+  import mainFoot from '@/components/footer'
+  export default {
+    name: 'App',
+    components:{
+      mainFoot
+    },
+    data(){
+      return {
+        transitionName:'slide-left',
+        footIndex:0
+      }
+    },
+    methods:{
+      toPage(datas){
+        this.$router.push(datas.src);
+      }
+    }
+  }
 </script>
 
-<style>
+<style lang="less">
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
   color: #2c3e50;
   height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  .router-view {
+    position: relative;
+    
+  }
 }
 body, html {
   height: 100%;
@@ -33,9 +55,7 @@ ul,li,ol,p,div {
   margin: 0;
   padding: 0;
 }
-div,ul,li,a {
-  /* display: flex; */
-}
+
 .ellipsis {
   white-space: nowrap; 
   text-overflow:ellipsis; 

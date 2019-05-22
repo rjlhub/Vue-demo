@@ -24,11 +24,20 @@
             <p class="usetext" v-else style="color:#cccccc;">已失效</p>
           </div>
         </div> -->
-        <coupons :datas="coupons"></coupons>
+        <div v-if="coupons.length != 0" class="couponsbox">
+          <coupons :datas="coupons"></coupons>
+        </div>
+        <div v-else class="nocoupons">
+          <img src="@/assets/imgs/empty.jpg" alt="">
+        </div>
       </div>
-      <div v-else>
-        <!-- <p>asddddd</p> -->
-        <coupons :datas="coupons"></coupons>
+      <div v-else class="couponsbox">
+        <div v-if="coupons.length != 0" class="couponsbox">
+          <coupons :datas="coupons"></coupons>
+        </div>
+        <div v-else class="nocoupons">
+          <img src="@/assets/imgs/empty.jpg" alt="">
+        </div>
       </div>
     </div>
   </div>
@@ -50,43 +59,43 @@ export default {
         width:'20px',
       },
       coupons:[
-        {
-          id:1,
-          coupontype:1,
-          bgcolor:'red',
-          price: '5',
-          limit: '满20元可用',
-          title:'来自****旗舰店',
-          validitytime:'2019-12-31',
-          failure: 1, //失效
-        },{
-          id:2,
-          coupontype:2,
-          bgcolor:'#c53097',
-          price: '满减',
-          limit: '满20元减10元',
-          title:'来自****旗舰店',
-          validitytime:'2019-12-31',
-          failure: 1, //失效
-        },{
-          id:3,
-          coupontype:2,
-          bgcolor:'blue',
-          price: '包邮',
-          limit: '全场包邮',
-          title:'来自****旗舰店',
-          validitytime:'2019-12-31',
-          failure: 1, //失效
-        },{
-          id:4,
-          coupontype:1,
-          bgcolor:'gray',
-          price: '32',
-          limit: '满20元可用',
-          title:'来自****旗舰店',
-          validitytime:'2019-12-31',
-          failure: 0, //失效
-        }
+        // {
+        //   id:1,
+        //   coupontype:1,
+        //   bgcolor:'red',
+        //   price: '5',
+        //   limit: '满20元可用',
+        //   title:'来自****旗舰店',
+        //   validitytime:'2019-12-31',
+        //   failure: 1, //失效
+        // },{
+        //   id:2,
+        //   coupontype:2,
+        //   bgcolor:'#c53097',
+        //   price: '满减',
+        //   limit: '满20元减10元',
+        //   title:'来自****旗舰店',
+        //   validitytime:'2019-12-31',
+        //   failure: 1, //失效
+        // },{
+        //   id:3,
+        //   coupontype:2,
+        //   bgcolor:'blue',
+        //   price: '包邮',
+        //   limit: '全场包邮',
+        //   title:'来自****旗舰店',
+        //   validitytime:'2019-12-31',
+        //   failure: 1, //失效
+        // },{
+        //   id:4,
+        //   coupontype:1,
+        //   bgcolor:'gray',
+        //   price: '32',
+        //   limit: '满20元可用',
+        //   title:'来自****旗舰店',
+        //   validitytime:'2019-12-31',
+        //   failure: 0, //失效
+        // }
       ],
     }
   },
@@ -102,7 +111,7 @@ export default {
 </script>
 <style lang="less" scoped>
   .coupons-page {
-    background-color: #f2f2f2;
+    background-color: #eff2f7;
     position: absolute;
     top: 0;
     left: 0;
@@ -142,7 +151,12 @@ export default {
           }
         }
       }
-      
+      .nocoupons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 20%;
+      }
     }
   }
 </style>

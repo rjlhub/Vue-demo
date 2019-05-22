@@ -1,6 +1,10 @@
 <template>
   <div class="sign-in-page">
-    <v-header name="签到"></v-header>
+    <v-header name="签到">
+      <!-- <div slot-scope="props">
+        <span>{{props.text}}</span>
+      </div> -->
+    </v-header>
     <div class="signIn-content">
       <div class="interal-head">
         <p class="integral">当前积分：</p>

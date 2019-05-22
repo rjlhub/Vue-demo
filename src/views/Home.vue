@@ -55,7 +55,7 @@
     <!-- <div class="partition"></div> -->
     <div class="selectList">
       <h2 class="selectTitle">精选推荐</h2>
-      <div class="selectContent" v-for="(item,index) in selects" :key="index">
+      <div class="selectContent" v-for="(item,index) in selects" :key="index" @click="toDetails(item.id)">
 
         <div class="yieldview itembox">
           <p class="yield">+{{item.yield}}%</p>
@@ -133,7 +133,7 @@ export default {
       activityIndex:0,
       activities:urlList,
       selects:[{
-        id:1,
+        id:127398,
         stage:'28', // 第几期
         startCastPrice: 1000, //起投价格
         fundType:'稳健收益固定期权', //类型
@@ -158,6 +158,10 @@ export default {
     },
     backClick(){
       console.log('ads')
+    },
+    toDetails(id) {
+      this.$router.push({name: 'details',params:{id: id}})
+      // this.$router.push()
     }
   }
 }

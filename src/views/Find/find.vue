@@ -7,9 +7,53 @@
       </tab>
       <div style="overflow-x:hidden;">
         <swiper v-model="index" :height="screenHeight" :show-dots="false" @on-index-change="pageChangeIndex">
-          
-          <swiper-item v-for="(item, currentIndex) in list2" :key="currentIndex">
-            <div class="tab-swiper vux-center">{{item}} Container</div>
+
+          <swiper-item class="s-item">
+
+            <div class="stock-head row">
+              <p class="head-name name-sty">产品名称</p>
+              <div class="head-ctrl row">
+                <div class="ctrl1 row">
+                  <span class="name-sty">最新价</span>
+                  <div class="column mleft">
+                    <i class="triangle-top"></i>
+                    <i class="triangle-bottom"></i>
+                  </div>
+                </div>
+                <div class="ctrl1 row">
+                  <span class="name-sty">涨跌幅</span>
+                  <div class="column mleft">
+                    <i class="triangle-top"></i>
+                    <i class="triangle-bottom"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="stockmain">
+              <div v-for="(item,idx) in stocks" :key="idx" class="row stockList">
+                <div class="column item-left">
+                  <p class="itemsty">{{item.name}}</p>
+                  <p style="font-size: 12px;">{{item.code}}</p>
+                </div>
+                <div class="row item-right">
+                  <p class="itemsty" :style="{color:(!item.riseOrFall?'#059605':'#f10606')}">{{item.price}}</p>
+                  <div class="applies" :style="{backgroundColor:(item.riseOrFall?'#f10606':'#059605')}">
+                    <p>{{item.applies}}</p>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </swiper-item>
+          <swiper-item>
+            <div class="stock-head">
+              
+            </div>
+          </swiper-item>
+          <swiper-item>
+            <div class="stock-head">
+              
+            </div>
           </swiper-item>
         </swiper>
       </div>
@@ -44,6 +88,27 @@ export default {
       leftStyle:{
         left: '16%'
       },
+      stocks: [
+        {
+          riseOrFall: false,
+          name: '万科A',
+          code: '000002',
+          price: '22.74',
+          applies: '-1.19%'
+        },{
+          riseOrFall: false,
+          name: '万科B',
+          code: '000003',
+          price: '24.61',
+          applies: '-0.89%'
+        },{
+          riseOrFall: true,
+          name: '顺丰控股',
+          code: '230527',
+          price: '1231.01',
+          applies: '+3.14%'
+        }
+      ],
       activeIndex: 0
     }
   },
@@ -169,5 +234,82 @@ export default {
     display: inherit;
     flex: inherit;
   }
+  .s-item {
+    .stock-head {
+      align-items: center;
+      padding-left: 14px;
+      padding-right: 14px;
+      padding-top: 6px;
+      padding-bottom: 6px;
+      background-color: #f2f2f2;
+      .head-name {
+        flex:1;
+      }
+      .name-sty {
+        font-size: 15px;
+        font-weight: 500;
+        color: #666666;
+      }
+      .head-ctrl {
+        flex: 1;
+        justify-content: space-between;
+        .ctrl1 {
+          align-items: center;
+          .mleft {
+            margin-left: 4px;
+          }
+        }
+      }
+    }
+    .stockmain {
+      padding-left: 12px;
+      padding-right: 10px;
+      .stockList {
+        flex: 1;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #eeeeee;
+        .item-left {
+          flex:1;
+        }
+        .item-right {
+          flex: 1;
+          justify-content: space-between;
+          align-items: center;
+          .applies {
+            width: 80px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            background-color: #059605;
+            font-size: 20px;
+            color: #ffffff;
+          }
+        }
+      }
+    }
+  
+    .triangle-top{
+      width: 0;
+      height: 0;
+      border: 6px solid transparent;
+      border-bottom-color: #666666;
+    }
+    .triangle-bottom{
+      width: 0;
+      height: 0;
+      border: 6px solid transparent;
+      border-top-color: #666666;
+      margin-top: 2px;
+    }
+  }
+  .itemsty {
+    font-size: 18px;
+    font-weight: bold;
+    color: #666666;
+  }
+  
   .vux-tab-ink-bar {}
 </style>

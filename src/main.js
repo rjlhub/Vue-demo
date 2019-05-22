@@ -11,7 +11,27 @@ import animate from './assets/css/animate.css'
 import './assets/css/icon/iconfont.css'
 
 import Toast from './components/toast'
+
+import axios from 'axios'
+import vueSwiper from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css' // 引入样式
+// api 全局获取
+import {post,fetch} from './api/request'
+
+// var $http = axios.create({
+//   baseURL:'',
+//   timeout:'3000',
+//   headers: {'X-Custom-Header':'foobar'}
+// })
+// 定义全局变量
+// Vue.prototype.$http = $http;
+Vue.prototype.$post = post;
+Vue.prototype.$fetch = fetch;
+
+
+
 Vue.use(Toast);
+Vue.use(vueSwiper)
 
 // tab-slide
 import TabSlider from 'tab-slider'
@@ -25,6 +45,7 @@ Vue.use(AlertPlugin)
 Vue.use(ToastPlugin)
 
 Vue.prototype.animate = animate
+
 
 Vue.config.productionTip = false
 

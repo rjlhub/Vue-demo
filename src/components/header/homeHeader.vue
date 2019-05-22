@@ -10,7 +10,7 @@
           <div class="searchIpt">{{iptVal}}</div>
         </router-link>
       </div>
-      <router-link tag="div" to="message" class="back" >
+      <router-link tag="div" :to="{name:'message',params:{name:1}}" class="back" >
         <i class="iconfont icon-document icontype"></i>
       </router-link>
       <p class="header-title">{{name}}</p>
@@ -109,7 +109,7 @@ export default {
       
     },
     navJump(to,id){
-      console.log(to,id)
+      // console.log(to,id)
       this.$router.push({name: to,params:{id: id}})
     }
   },
